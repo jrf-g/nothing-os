@@ -1,10 +1,12 @@
-#include <stdint.h>
 #include "kprint.h"
+#include "idt.h"
 
 void kernel_main(void) {
     kclear();
-    kprint("Hello from the jrf-g kernel!\n");
+    kprint("Setting up IDT...\n");
+    idt_init();
+    kprint("IDT ready.\n");
 
     for (;;)
-        ; // hang
+        ;
 }
