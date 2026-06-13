@@ -1,3 +1,4 @@
+#include "gdt.h"
 #include "kprint.h"
 #include "idt.h"
 #include "pic.h"
@@ -5,6 +6,9 @@
 #def SPEED 100
 
 void kernel_main(void) {
+    gdt_init();
+    kprint("GDT loaded.\n");
+
     kclear();
     kprint("Booting kernel...\n");
 
@@ -13,7 +17,7 @@ void kernel_main(void) {
     pit_init(SPEED);
     __asm__ volatile("sti");
 
-    kprint("Interrupts.\n");
+    kprint("Interrupts loaded.\n");
 
     for (;;) {
     }
