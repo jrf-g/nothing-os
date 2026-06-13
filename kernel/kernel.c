@@ -1,16 +1,20 @@
 #include "kprint.h"
 #include "idt.h"
 #include "pic.h"
+#include "pit.h"
+#def SPEED 100
 
 void kernel_main(void) {
     kclear();
     kprint("Booting kernel...\n");
-    // --- INTERRUPT SYSTEM SETUP ---
-    pic_remap();                 // Move IRQs to 32–47
-    idt_init();                  // Load IDT with ISRs + IRQs
-    __asm__ volatile("sti");     // Enable interrupts globally
-    kprint("Interrupts enabled.\n");
+
+    pic_remap();
+    idt_init();
+    pit_init(SPEED);
+    __asm__ volatile("sti");
+
+    kprint("Interrupts.\n");
+
     for (;;) {
-        // idle loop
     }
 }
