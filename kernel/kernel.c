@@ -31,7 +31,9 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     void* c = kmalloc(64);
 
     kprint("Memory system online.\n");
-
+    keyboard_init();
+    shell();
+    
     for (;;) {
         // idle
     }
