@@ -1,17 +1,33 @@
-#include "irq.h"
+#include <stdint.h>
 #include "pic.h"
-#include "kprint.h"
 #include "pit.h"
-#def TICK
+#include "keyboard.h"
+#include "kprint.h"
+
+struct irq_regs {
+    uint32_t ds;
+    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+    uint32_t int_no, err_code;
+    uint32_t eip, cs, eflags, useresp, ss;
+};
 
 void irq_handler_c(struct irq_regs* r) {
     int irq = r->int_no - 32;
 
-    if (irq == 0) {
-        pit_tick();
-        #ifdef TICK
-        if ((pit_ticks() % 100) == 0) kprint("tick\n");
-        #endif
+    switch (irq) {
+        case 0:
+            pit_tick();
+            break;
+
+        case 1:
+            keyboard_irq_handler();
+            // keyboard handler already sends EOI
+            return;
+
+        default:
+            // Optional debug:
+            // kprintf("Unhandled IRQ %d\n", irq);
+            break;
     }
 
     pic_send_eoi(irq);
