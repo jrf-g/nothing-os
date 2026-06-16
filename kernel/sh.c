@@ -104,10 +104,3 @@ static void cmd_cat(const char* name) {
     kputc('\n');
 }
 
-static void cmd_saveimg(void) {
-    uint8_t* img = (uint8_t*)kmalloc(64 * 1024);
-    uint32_t sz = ramfs_serialize(img, 64 * 1024);
-    kprintf("RAMFS image size: %d bytes\n", (int)sz);
-    // TODO: write `img` to disk sectors when you add a disk driver
-    kfree(img);
-}
