@@ -2,6 +2,7 @@
 #include "kprint.h"
 #include "keyboard.h"
 #include "pit.h"
+#include "ramfs.h"
 
 static void read_line(char* buf, int max) {
     int i = 0;
@@ -79,4 +80,34 @@ void shell(void) {
             kprint("Unknown command. Type 'help'.\n");
         }
     }
+}
+static void cmd_ls(void) {
+    ramfs_list();
+}
+
+static void cmd_write(const char* name, const char* text) {
+    if (ramfs_create(name) != 0) {
+        // ignore if exists; or handle error
+    }
+    ramfs_write(name, text, (uint32_t)strlen(text));
+}
+
+static void cmd_cat(const char* name) {
+    char buf[4096];
+    int n = ramfs_read(name, buf, sizeof(buf)-1);
+    if (n < 0) {
+        kprint("No such file.\n");
+        return;
+    }
+    buf[n] = 0;
+    kprint(buf);
+    kputc('\n');
+}
+
+static void cmd_saveimg(void) {
+    uint8_t* img = (uint8_t*)kmalloc(64 * 1024);
+    uint32_t sz = ramfs_serialize(img, 64 * 1024);
+    kprintf("RAMFS image size: %d bytes\n", (int)sz);
+    // TODO: write `img` to disk sectors when you add a disk driver
+    kfree(img);
 }
