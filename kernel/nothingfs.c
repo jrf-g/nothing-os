@@ -388,3 +388,36 @@ uint32_t nfs_deserialize(const uint8_t* buf, uint32_t len) {
 
     return len;
 }
+int nfs_remove(const char* path) {
+    int idx = nfs_lookup(path);
+    if (idx < 0) return -1;
+
+    nf_entry_t* e = &nfs_entries[idx];
+
+    // cannot delete root
+    if (idx == 0) return -2;
+
+    // if directory and not empty
+    if (e->type == NF_DIR && e->first_child != (uint32_t)-1)
+        return -3;
+
+    // unlink from parent
+    int parent = e->parent;
+    nf_entry_t* p = &nfs_entries[parent];
+
+    uint32_t* link = &p->first_child;
+    while (*link != (uint32_t)-1) {
+        if (*link == idx) {
+            *link = e->next_sibling;
+            break;
+        }
+        link = &nfs_entries[*link].next_sibling;
+    }
+
+    // free file data
+    if (e->type == NF_FILE && e->data)
+        kfree(e->data);
+
+    e->used = 0;
+    return 0;
+}
