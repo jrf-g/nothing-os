@@ -205,4 +205,10 @@ static void cmd_pwd(void) {
     kprint(buf);
     kputc('\n');
 }
+static void cmd_rmv(const char* path) {
+    int r = nfs_remove(path);
+    if (r == -1) kprint("rmv: no such file or directory\n");
+    else if (r == -2) kprint("rmv: cannot remove root\n");
+    else if (r == -3) kprint("rmv: directory not empty\n");
+}
 
