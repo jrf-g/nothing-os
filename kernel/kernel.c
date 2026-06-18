@@ -6,6 +6,7 @@
 #include "pit.h"
 #include "multiboot.h"
 #include "mm.h"
+#include "nothingfs.h"
 
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
@@ -21,7 +22,8 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     idt_init();
     pit_init(100);
     __asm__ volatile("sti");
-
+    nfs_init();
+    nfs_mkdir("/defualt");
     mm_init(mb_info_addr);
 
     kprint("Testing kmalloc...\n");
