@@ -124,6 +124,14 @@ void shell(void) {
             kprint(buf);
             kputc('\n');
         }
+        else if (strcmp(cmd, "rmv") == 0) {
+        if (argc < 2) {
+            kprint("usage: rmv <path>\n");
+        } else {
+            cmd_rmv(argv[1]);
+        }
+}
+
         else {
             kprint("Unknown command.\n");
         }
