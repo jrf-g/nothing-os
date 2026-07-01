@@ -3,7 +3,7 @@
 #include "gdt.h"
 #include "idt.h"
 #include "pic.h"
-#include "pit.h"
+#include "autopit.h"
 #include "multiboot.h"
 #include "mm.h"
 #include "nothingfs.h"
@@ -20,7 +20,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     gdt_init();
     pic_remap();
     idt_init();
-    pit_init(100);
+    autoclk();
     __asm__ volatile("sti");
     nfs_init();
     nfs_mkdir("/default");
