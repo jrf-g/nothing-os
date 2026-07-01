@@ -3,11 +3,12 @@
 #include "gdt.h"
 #include "idt.h"
 #include "pic.h"
+#include "pit.h"
 #include "autopit.h"
 #include "multiboot.h"
 #include "mm.h"
 #include "nothingfs.h"
-#include "bool.h"
+#define AUTOCLKEN 1
 
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
@@ -21,7 +22,11 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     gdt_init();
     pic_remap();
     idt_init();
-    autoclk();
+    if (AUTOCLKEN) {
+        autoclk();
+    } else {
+        pit_init(FREQ);
+    }
     __asm__ volatile("sti");
     nfs_init();
     nfs_mkdir("/default");
