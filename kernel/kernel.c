@@ -23,7 +23,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     pit_init(100);
     __asm__ volatile("sti");
     nfs_init();
-    nfs_mkdir("/defualt");
+    nfs_mkdir("/default");
     mm_init(mb_info_addr);
 
     kprint("Testing kmalloc...\n");
