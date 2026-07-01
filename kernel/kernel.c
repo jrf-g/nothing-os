@@ -8,7 +8,6 @@
 #include "multiboot.h"
 #include "mm.h"
 #include "nothingfs.h"
-#define AUTOCLKEN 1
 
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
@@ -22,11 +21,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     gdt_init();
     pic_remap();
     idt_init();
-    if (AUTOCLKEN) {
-        autoclk();
-    } else {
-        pit_init(FREQ);
-    }
+    autoclk();
     __asm__ volatile("sti");
     nfs_init();
     nfs_mkdir("/default");
