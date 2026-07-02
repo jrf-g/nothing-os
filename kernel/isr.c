@@ -1,5 +1,6 @@
 #include "isr.h"
 #include "kprint.h"
+#include "powerctl.h"
 
 static const char* exception_messages[] = {
     "Division By Zero",
@@ -36,6 +37,6 @@ void isr_handler_c(struct isr_regs* r) {
         kprint("Unknown");
 
     kprint("\nSystem halted.\n");
-    for (;;)
-        ;
+    __asm__ volatile("hlt");
+    reboot();
 }
