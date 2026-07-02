@@ -3,6 +3,7 @@
 #include "keyboard.h"
 #include "pit.h"
 #include "ramfs.h"
+#include "powerctl.h" // for reboot
 static int current_dir = 0; // root
 
 static int tokenize(char* line, char* argv[], int max_args) {
