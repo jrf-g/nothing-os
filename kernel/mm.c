@@ -1,6 +1,8 @@
 #include "mm.h"
 #include "multiboot.h"
 #include "kprint.h"
+#define MAXMEMINT 128
+#define MAXMEMSTR "128"
 
 extern uint8_t _kernel_end;   // defined by linker script
 
@@ -98,4 +100,22 @@ void kfree(void* ptr) {
     block_header_t* block = (block_header_t*)((uint8_t*)ptr - sizeof(block_header_t));
     block->free = 1;
     coalesce();
+}
+
+void* safemalloc(uint32_t safesize) {
+    if (safesize > MAXMEMINT) {
+        oom();
+    }
+    buffer = kmalloc(safesize);
+    if (!buffer) {
+        oom();
+    }
+    return buffer
+    
+}
+
+static void oom() {
+    kprint("OUT OF MEMORY. MAX MEMORY " MAXMEMSTR);
+    while(;;) {
+        __asm__ volatile("hlt");
 }
