@@ -3,7 +3,6 @@
 #include "gdt.h"
 #include "idt.h"
 #include "pic.h"
-#include "pit.h"
 #include "autopit.h"
 #include "multiboot.h"
 #include "mm.h"
