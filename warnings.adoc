@@ -1,0 +1,5 @@
+= WARNING
+jrf-g
+1, 2026-06-02
+
+TIP: to prevent the system from locking up due to what it calls bad DKLs you should open the msgdkl file and replace 0x0 with 0xFF
