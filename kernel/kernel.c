@@ -30,7 +30,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kprint("Testing kmalloc...\n");
     void* a = kmalloc(128);
     kfree(a);
-    void* b = kmalloc(128)
+    void* b = kmalloc(128);
     kprint("Memory system online.\n");
 
     shell();
