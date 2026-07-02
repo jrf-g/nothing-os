@@ -13,8 +13,9 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kprint("Kernel start.\n");
 
     if (magic != MULTIBOOT_MAGIC) {
-        kprint("Bad multiboot magic.\n");
-        for (;;) {}
+        kprint("Bad multiboot magic. PRESS ANY KEY TO REBOOT\n");
+        __asm__ volatile("hlt");
+        reboot();
     }
 
     gdt_init();
