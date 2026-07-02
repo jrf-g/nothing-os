@@ -1,3 +1,4 @@
+#!/bin/bash
 export CC=i686-elf-gcc
 export LD=i686-elf-ld
 export AS=nasm
