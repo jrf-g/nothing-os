@@ -3,8 +3,8 @@
 #include "keyboard.h"
 #include "pit.h"
 #include "ramfs.h"
-#include "powerctl.h"   // SKL module
-
+#include "powerctl.h"   // SKL power control module
+// SKL is static kernel library
 static int current_dir = 0; // root
 
 // ------------------------------------------------------------
@@ -86,6 +86,7 @@ static void cmd_help(void) {
     kprint("  cat      - read file\n");
     kprint("  rmv      - remove file or directory\n");
     kprint("  reboot   - reboot system\n");
+    kprint("  shutdown - power off system\n");
 }
 
 static void cmd_clear(void) {
@@ -98,7 +99,11 @@ static void cmd_ticks(void) {
 }
 
 static void cmd_reboot(void) {
-    reboot();
+    reboot();   // or powerctl_reboot() if you prefer
+}
+
+static void cmd_shutdown(void) {
+    powerctl_shutdown();
 }
 
 // ------------------------------------------------------------
@@ -134,6 +139,9 @@ void shell(void) {
         }
         else if (strcmp(cmd, "reboot") == 0) {
             cmd_reboot();
+        }
+        else if (strcmp(cmd, "shutdown") == 0) {
+            cmd_shutdown();
         }
         else if (strcmp(cmd, "mkdir") == 0) {
             if (argc < 2) {
@@ -182,6 +190,15 @@ void shell(void) {
             } else {
                 cmd_rmv(argv[1]);
             }
+        }
+        else if (strcmp(cmd, "help") == 0) {
+            cmd_help();
+        }
+        else if (strcmp(cmd, "clear") == 0) {
+            cmd_clear();
+        }
+        else if (strcmp(cmd, "ticks") == 0) {
+            cmd_ticks();
         }
         else {
             kprint("Unknown command.\n");
