@@ -16,7 +16,7 @@ isr\num:
 
 ISR_NOERR 0
 ISR_NOERR 1
-# ... repeat up to 31 as needed
+# ... repeat as needed
 
 isr_common_stub:
     pusha             # push general-purpose registers
