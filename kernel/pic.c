@@ -25,11 +25,11 @@ void pic_remap(void) {
     outb(PIC1_CMD, ICW1_INIT | ICW1_ICW4);
     outb(PIC2_CMD, ICW1_INIT | ICW1_ICW4);
 
-    outb(PIC1_DATA, 0x20); // Master PIC vector offset
-    outb(PIC2_DATA, 0x28); // Slave PIC vector offset
+    outb(PIC1_DATA, 0x20);
+    outb(PIC2_DATA, 0x28);
 
-    outb(PIC1_DATA, 4);    // Tell Master PIC about Slave at IRQ2
-    outb(PIC2_DATA, 2);    // Tell Slave PIC its cascade identity
+    outb(PIC1_DATA, 4);
+    outb(PIC2_DATA, 2);
 
     outb(PIC1_DATA, ICW4_8086);
     outb(PIC2_DATA, ICW4_8086);
