@@ -17,7 +17,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
 
     if (magic != MULTIBOOT_MAGIC) {
         kprint("Bad multiboot magic. PRESS ANY KEY TO REBOOT\n");
-        __asm__ volatile("hlt");
+        __asm__ volatile("int $33");
         reboot();
     }
 
