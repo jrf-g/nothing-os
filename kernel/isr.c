@@ -1,5 +1,6 @@
 #include "isr.h"
 #include "kprint.h"
+#include "powerctl.h"
 
 static const char* exception_messages[] = {
     "Division By Zero",
@@ -17,7 +18,7 @@ static const char* exception_messages[] = {
     "Stack-Segment Fault",
     "General Protection Fault",
     "Page Fault",
-    "Reserved",
+    "Intel Reserved Interrupt",
     "x87 Floating-Point Exception",
     "Alignment Check",
     "Machine Check",
@@ -25,16 +26,19 @@ static const char* exception_messages[] = {
     "Virtualization Exception",
     "Control Protection Exception",
     "Reserved", "Reserved", "Reserved", "Reserved",
-    "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved"
+    "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
+    "Critical Module Tampered With", "Bad Magic"
 };
 
 void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
-    if (r->int_no < 32)
+    if (r->int_no < 34)
         kprint(exception_messages[r->int_no]);
     else
         kprint("Unknown");
 
     kprint("\nSystem halted.\n");
+    __asm__ volatile("sti");
     __asm__ volatile("hlt");
+    reboot();
 }
