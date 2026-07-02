@@ -1,3 +1,4 @@
+#include powerctl.h
 void reboot() {
   outw(0xB004, 0x0006);
   while (inb(0x64) & 0x02);
