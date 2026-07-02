@@ -9,6 +9,7 @@
 #include "nothingfs.h"
 #include "powerctl.h"
 #include "usedkl.h"
+#include "startmem.h"
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
     kprint("Kernel start.\n");
@@ -31,11 +32,11 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     nfs_mkdir("/default");
 
     kprint("Testing kmalloc...\n");
-    void* a = kmalloc(128);
+    void* a = kmalloc(STARTMEMINT);
     kfree(a);
     a = NULL;
-    void* b = safealloc(128);
-    kprint("Memory system online.\n");
+    void* b = safealloc(STARTMEMINT);
+    kprint("Memory system online.\n" STARTMEMSTR MEMUNIT MEMPLURAL "allocated\n");
 
     shell();
     
