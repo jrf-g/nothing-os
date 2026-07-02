@@ -1,4 +1,5 @@
 #pragma once
 #define STARTMEMINT 128
 #define STARTMEMSTR "128"
-#define MEMUNIT "bytes"
+#define MEMUNIT "byte"
+#define MEMUNITPLURAL "s"
