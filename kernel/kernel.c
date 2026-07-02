@@ -9,6 +9,7 @@
 #include "mm.h"
 #include "nothingfs.h"
 #include "powerctl.h"
+#include "usedkl.h"
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
     kprint("Kernel start.\n");
@@ -25,6 +26,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     autoclk();
     keyboard_init();
     __asm__ volatile("sti");
+    dklinit();
     mm_init(mb_info_addr);
     nfs_init();
     nfs_mkdir("/default");
