@@ -8,7 +8,6 @@
 #include "multiboot.h"
 #include "mm.h"
 #include "nothingfs.h"
-
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
     kprint("Kernel start.\n");
