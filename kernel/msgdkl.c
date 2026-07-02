@@ -1,10 +1,11 @@
 #include "msgdkl.h"
 #include "verdkl.h"
 #include "powerctl.h"
+#include "kprint.h"
 int secure = 0;
 void msgdkl_print() {
   if (!secure) {
-    shutdown();
+    badlib();
   }
   kprint(DKLTXT);
 }
