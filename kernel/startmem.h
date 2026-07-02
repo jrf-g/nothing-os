@@ -2,4 +2,4 @@
 #define STARTMEMINT 128
 #define STARTMEMSTR "128"
 #define MEMUNIT "byte"
-#define MEMUNITPLURAL "s"
+#define MEMPLURAL "s"
