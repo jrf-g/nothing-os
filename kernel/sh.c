@@ -95,6 +95,19 @@ void shell(void) {
         if (strcmp(cmd, "ls") == 0) {
             nfs_list(argc > 1 ? argv[1] : "/");
         }
+        else if (strcmp(cmd, "pwd") == 0) {
+            cmd_pwd();
+        }
+        else if (strcmp(cmd, "cd") == 0) {
+            if (argc < 2) {
+                kprint("usage: cd <path>\n");
+            } else {
+                cmd_cd(argv[1]);
+            }
+}
+    else if (strcmp(cmd, "reboot") == 0) {
+        cmd_reboot();
+    }
         else if (strcmp(cmd, "mkdir") == 0) {
             if (argc < 2) { kprint("usage: mkdir <path>\n"); continue; }
             nfs_mkdir(argv[1]);
@@ -219,4 +232,6 @@ static void cmd_rmv(const char* path) {
     else if (r == -2) kprint("rmv: cannot remove root\n");
     else if (r == -3) kprint("rmv: directory not empty\n");
 }
-
+static void cmd_reboot(void) {
+    reboot();
+}
