@@ -4,5 +4,6 @@
 // just add the dkl call in the initdkl function
 // the functions of all dkls should start with the name of the dkl
 void initdkl() {
+  msgdkl_verify();
   msgdkl_print();
 }
