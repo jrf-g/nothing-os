@@ -99,11 +99,11 @@ static void cmd_ticks(void) {
 }
 
 static void cmd_reboot(void) {
-    reboot();   // or powerctl_reboot() if you prefer
+    reboot();
 }
 
 static void cmd_shutdown(void) {
-    powerctl_shutdown();
+    shutdown();
 }
 
 // ------------------------------------------------------------
