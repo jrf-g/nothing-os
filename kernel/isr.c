@@ -28,8 +28,8 @@ static const char* exception_messages[] = {
     "Control Protection Exception",
     "Reserved", "Reserved", "Reserved", "Reserved",
     "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
-    "Critical Module Tampered With", "Bad Magic", "Out of Memory"
-};
+    "Critical Module Tampered With", "Bad Magic"
+}; // Out of Memory is unused
 void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
     kprint(exception_messages[r->int_no]);
