@@ -6,11 +6,14 @@
 #include "autopit.h"
 #include "multiboot.h"
 #include "mm.h"
+#include 
 #include "nothingfs.h"
 #include "powerctl.h"
 #include "usedkl.h"
 #include "startmem.h"
 #include "audio.h"
+#define SAFEMODE = 0
+#define SUPERFANCY = 0
 typedef void* MemAddr;
 typedef unsigned char* BytesPointer
 void memtest(void* ptr, unsigned int size)
@@ -29,7 +32,10 @@ void memtest(void* ptr, unsigned int size)
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
     kprint("Kernel start.\n");
-
+    fancy = !SAFEMODE
+    if (!fancy) {
+        kprint("SAFE MODE ENABLED.");
+    }
     if (magic != MULTIBOOT_MAGIC) {
         kprint("Bad multiboot magic. PRESS ANY KEY TO REBOOT\n");
         __asm__ volatile("int $33");
@@ -39,10 +45,16 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     gdt_init();
     pic_remap();
     idt_init();
-    autoclk();
+    if (fancy)  {
+        autoclk();
+    } else {
+        pit_init(FREQ);
+    }
     keyboard_init();
     __asm__ volatile("sti");
-    initdkl();
+    if (fancy) {
+        initdkl();
+    }
     mm_init(mb_info_addr);
     nfs_init();
     nfs_mkdir("/default");
