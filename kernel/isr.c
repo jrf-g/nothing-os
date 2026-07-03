@@ -1,6 +1,7 @@
 #include "isr.h"
 #include "kprint.h"
 #include "powerctl.h"
+#include "panicchime.h"
 extern void softoffisr(void);
 static const char* exception_messages[] = {
     "Division By Zero",
@@ -33,6 +34,7 @@ void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
     kprint(exception_messages[r->int_no]);
     kprint("\nSystem halted.\n. Press key to reboot");
+    panic_chime();
     softoffisr();
     reboot();
     
