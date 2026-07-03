@@ -27,16 +27,13 @@ static const char* exception_messages[] = {
     "Control Protection Exception",
     "Reserved", "Reserved", "Reserved", "Reserved",
     "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
-    "Critical Module Tampered With", "Bad Magic"
+    "Critical Module Tampered With", "Bad Magic", "Out of Memory"
 };
 void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
-    if (r->int_no < 34)
-        kprint(exception_messages[r->int_no]);
-    else
-        kprint("Unknown");
-
+    kprint(exception_messages[r->int_no]);
     kprint("\nSystem halted.\n. Press key to reboot");
     softoffisr();
+    reboot();
     
 }
