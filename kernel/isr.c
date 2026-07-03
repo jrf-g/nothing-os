@@ -1,7 +1,7 @@
 #include "isr.h"
 #include "kprint.h"
 #include "powerctl.h"
-
+extern void softoffisr(void);
 static const char* exception_messages[] = {
     "Division By Zero",
     "Debug",
@@ -29,7 +29,6 @@ static const char* exception_messages[] = {
     "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
     "Critical Module Tampered With", "Bad Magic"
 };
-
 void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
     if (r->int_no < 34)
@@ -37,8 +36,7 @@ void isr_handler_c(struct isr_regs* r) {
     else
         kprint("Unknown");
 
-    kprint("\nSystem halted.\n");
-    __asm__ volatile("sti");
-    __asm__ volatile("hlt");
-    reboot();
+    kprint("\nSystem halted.\n. Press key to reboot");
+    softoffisr();
+    
 }
