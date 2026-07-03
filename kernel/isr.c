@@ -26,10 +26,9 @@ static const char* exception_messages[] = {
     "SIMD Floating-Point Exception",
     "Virtualization Exception",
     "Control Protection Exception",
-    "Reserved", "Reserved", "Reserved", "Reserved",
-    "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
-    "Critical Module Tampered With", "Bad Magic"
-}; // Out of Memory is unused
+    "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved", "Reserved",
+    "Critical Module Tampered With", "Bad Magic", "Out of Memory"
+};
 void isr_handler_c(struct isr_regs* r) {
     kprint("Exception: ");
     kprint(exception_messages[r->int_no]);
