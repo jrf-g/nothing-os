@@ -16,7 +16,9 @@ uint32_t fancy = 0;
 typedef void* MemAddr;
 typedef unsigned char* BytesPointer;
 void chime() {
-    beep(440, 110)
+    beep(440, 110);
+    beep(660, 110);
+    beep(880, 110);
 }
 void memtest(void* ptr, unsigned int size)
 {
