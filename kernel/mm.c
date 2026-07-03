@@ -2,6 +2,7 @@
 #include "multiboot.h"
 #include "kprint.h"
 #include "powerctl.h"
+#include "panicchime.h"
 #define MAXMEMINT 128
 #define MAXMEMSTR "128"
 
@@ -117,5 +118,6 @@ void* safemalloc(uint32_t safesize) {
 
 static void oom() {
     kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR);
+    panic_chime();
     __asm__ volatile("int $34");
 }
