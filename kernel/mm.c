@@ -3,8 +3,8 @@
 #include "kprint.h"
 #include "powerctl.h"
 #include "panicchime.h"
-#define MAXMEMINT 128
-#define MAXMEMSTR "128"
+#define MAXMEMINT 512
+#define MAXMEMSTR "512"
 
 extern uint8_t _kernel_end;   // defined by linker script
 
@@ -67,7 +67,9 @@ static void split_block(block_header_t* block, uint32_t size) {
 }
 
 void* kmalloc(uint32_t size) {
-    if (size == 0) return 0;
+    if (size == 0) {
+        oom();
+    }
 
     size = align_up(size, 8);
 
@@ -81,7 +83,7 @@ void* kmalloc(uint32_t size) {
         cur = cur->next;
     }
 
-    return 0; // out of memory
+    oom();
 }
 
 static void coalesce() {
@@ -97,7 +99,9 @@ static void coalesce() {
 }
 
 void kfree(void* ptr) {
-    if (!ptr) return;
+    if (!ptr) {
+        oom();
+    }
 
     block_header_t* block = (block_header_t*)((uint8_t*)ptr - sizeof(block_header_t));
     block->free = 1;
@@ -117,7 +121,7 @@ void* safemalloc(uint32_t safesize) {
 }
 
 static void oom() {
-    kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR);
+    kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR " THIS MAY ALSO BE CAUSED BY ANOTHER NON-OOM MEMORY FAULT");
     panic_chime();
-    __asm__ volatile("int $34");
+    __asm__ volatile("int 34");
 }
