@@ -1,4 +1,4 @@
-#include "time.c"
+#include "time.h"
 void beep(unsigned int freq, unsigned int duration)
 {
     unsigned int div = 1193180 / freq;
