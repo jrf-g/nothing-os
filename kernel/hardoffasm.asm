@@ -4,4 +4,3 @@ section .text
 hardoffasm:
   cli
   hlt
-  ud2
