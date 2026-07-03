@@ -16,6 +16,9 @@
 uint32_t fancy = 0;
 typedef void* MemAddr;
 typedef unsigned char* BytesPointer
+void chime() {
+    #include "bootchime.c"
+}
 void memtest(void* ptr, unsigned int size)
 {
     /* Fill with ones (0xFF) */
@@ -67,7 +70,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     memtest(b, STARTMEMINT);
     kprint("Memory system online.\n" STARTMEMSTR "(" MEMUNIT "(" MEMPLURAL "))" "allocated\n");
 
-    beep(440, 120);
+    chime();
     shell();
     
     for (;;) {}
