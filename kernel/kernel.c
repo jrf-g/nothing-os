@@ -12,6 +12,20 @@
 #include "startmem.h"
 #include "audio.h"
 typedef void* MemAddr;
+typedef unsigned char* BytesPointer
+void memtest(void* ptr, unsigned int size)
+{
+    /* Fill with ones (0xFF) */
+    BytesPointer pc = (BytesPointer)ptr;
+    for (unsigned int icxa = 0; icxa < size; icxa++) {
+        pc[icxa] = 0xFF;
+    }
+
+    /* Zero out again */
+    for (unsigned int icxb = 0; icxb < size; icxb++) {
+        pc[icxb] = 0x00;
+    }
+}
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
     kprint("Kernel start.\n");
@@ -38,7 +52,9 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kfree(a);
     a = NULL;
     MemAddr b = safealloc(STARTMEMINT);
-    kprint("Memory system online.\n" STARTMEMSTR MEMUNIT MEMPLURAL "allocated\n");
+    memtest(b, STARTMEMINT);
+    kprint("Memory system online.\n" STARTMEMSTR "(" MEMUNIT "(" MEMPLURAL "))" "allocated\n");
+
     beep(440, 120);
     shell();
     
