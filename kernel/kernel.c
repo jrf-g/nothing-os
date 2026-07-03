@@ -6,7 +6,6 @@
 #include "autopit.h"
 #include "multiboot.h"
 #include "mm.h"
-#include 
 #include "nothingfs.h"
 #include "powerctl.h"
 #include "usedkl.h"
