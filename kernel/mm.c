@@ -116,7 +116,6 @@ void* safemalloc(uint32_t safesize) {
 }
 
 static void oom() {
-    kprint("OUT OF MEMORY. MAX MEMORY " MAXMEMSTR ". PRESS ANY KEY TO REBOOT");
-    __asm__ volatile("hlt");
-    reboot();
+    kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR);
+    __asm__ volatile("int $34");
 }
