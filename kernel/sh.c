@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "std.h"
 #include "kprint.h"
 #include "keyboard.h"
 #include "pit.h"
