@@ -13,7 +13,7 @@
 #include "startmem.h"
 #include "audio.h"
 #define SAFEMODE = 0
-#define SUPERFANCY = 0
+uint32_t fancy = 0;
 typedef void* MemAddr;
 typedef unsigned char* BytesPointer
 void memtest(void* ptr, unsigned int size)
