@@ -14,9 +14,9 @@
 #define SAFEMODE = 0
 uint32_t fancy = 0;
 typedef void* MemAddr;
-typedef unsigned char* BytesPointer
+typedef unsigned char* BytesPointer;
 void chime() {
-    #include "bootchime.c"
+    beep(440, 110)
 }
 void memtest(void* ptr, unsigned int size)
 {
