@@ -10,6 +10,7 @@
 #include "powerctl.h"
 #include "usedkl.h"
 #include "startmem.h"
+#include "audio.h"
 typedef void* MemAddr;
 void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kclear();
@@ -38,7 +39,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     a = NULL;
     MemAddr b = safealloc(STARTMEMINT);
     kprint("Memory system online.\n" STARTMEMSTR MEMUNIT MEMPLURAL "allocated\n");
-
+    beep();
     shell();
     
     for (;;) {}
