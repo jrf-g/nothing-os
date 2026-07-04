@@ -69,7 +69,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     a = NULL;
     MemAddr b = safealloc(STARTMEMINT);
     memtest(b, STARTMEMINT);
-    kprint("Memory system online.\n" STARTMEMSTR "(" MEMUNIT "(" MEMPLURAL "))" "allocated\n");
+    kprint("Memory system online.\n" STARTMEMSTR "-" MEMUNIT "(" MEMPLURAL ") allocated\n");
 
     chime();
     shell();
