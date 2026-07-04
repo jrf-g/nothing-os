@@ -123,5 +123,5 @@ void* safemalloc(uint32_t safesize) {
 static void oom() {
     kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR " THIS MAY ALSO BE CAUSED BY ANOTHER NON-OOM MEMORY FAULT");
     panic_chime();
-    __asm__ volatile("int 34");
+    __asm__ volatile("int $34");
 }
