@@ -1,4 +1,4 @@
-typedef struct Beep {
+typedef struct {
   int freq;
   int len;
-} beeptone_t;
+} beeptone;
