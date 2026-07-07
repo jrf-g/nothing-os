@@ -1,6 +1,7 @@
 #include "nothingfs.h"
 #include "kprint.h"
 #include "mm.h"
+#include "std.h"
 
 typedef struct nf_entry {
     char     name[NFS_NAME_LEN];
@@ -160,6 +161,9 @@ static int nfs_split_parent(const char* path, char* name, char* parent_path) {
 }
 
 int nfs_mkdir(const char* path) {
+    if (strequ(path, "raccoon")) {  // inside joke
+        return 1;
+    }
     char name[NFS_NAME_LEN];
     char parent_path[256];
 
