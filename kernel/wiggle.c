@@ -1,0 +1,1 @@
+#define CRAZY 1
