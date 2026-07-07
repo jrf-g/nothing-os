@@ -1,7 +1,12 @@
 #pragma once
 #include <stdint.h>
-
+#def DONTBOOT
+#ifndef DONTBOOT
 #define MULTIBOOT_MAGIC 0x2BADB002
+#endif
+#ifdef DONTBOOT
+#define MULTIBOOT_MAGIC 0xC8408EE3
+#endif
 
 struct multiboot_mmap_entry {
     uint32_t size;
