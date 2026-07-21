@@ -16,7 +16,7 @@ static void move_cursor(void) {
     outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
 }
 
-static void change_color(uint8_t color) {
+void change_color(uint8_t color) {
     text_color = color;
 }
 
