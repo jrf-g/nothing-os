@@ -30,6 +30,8 @@ static const char* exception_messages[] = {
     "Critical Module Tampered With", "Bad Magic", "Out of Memory"
 };
 void isr_handler_c(struct isr_regs* r) {
+    change_color(0x1E);
+    kclear();
     kprint("Exception: ");
     kprint(exception_messages[r->int_no]);
     kprint("\nSystem halted.\n. Press key to reboot");
