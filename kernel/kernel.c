@@ -41,6 +41,9 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
         kprint("SAFE MODE ENABLED.");
     }
     if (magic != MULTIBOOT_MAGIC) {
+        beep(300, 100);
+        beep(500, 100);
+        beep(200, 300);
         kprint("Bad multiboot magic. PRESS ANY KEY TO REBOOT\n");
         __asm__ volatile("int $33");
         // reboot not needed. the ISR handles that
