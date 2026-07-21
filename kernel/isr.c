@@ -32,9 +32,10 @@ static const char* exception_messages[] = {
 void isr_handler_c(struct isr_regs* r) {
     change_color(0x1E);
     kclear();
-    kprint("Exception: ");
+    kprint("[ NOTHINGOS PANIC ]\n");
+    kprint("[ ***Exception: ");
     kprint(exception_messages[r->int_no]);
-    kprint("\nSystem halted.\n. Press key to reboot");
+    kprint("*** ]\n\nSystem halted.\nPress key to reboot.\n");
     panic_chime();
     softoffisr();
     reboot();
