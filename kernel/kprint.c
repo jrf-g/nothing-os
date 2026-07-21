@@ -67,8 +67,6 @@ void kprint(const char* s) {
         kputc(*s++);
 }
 
-/* minimal kprintf */
-
 static void kprint_dec(uint32_t v) {
     char buf[11];
     int i = 0;
@@ -91,7 +89,7 @@ static void kprint_hex(uint32_t v) {
         kputc(nib < 10 ? '0' + nib : 'A' + (nib - 10));
     }
 }
-
+/* minimal kprintf */
 void kprintf(const char* fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
