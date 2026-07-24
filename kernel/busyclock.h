@@ -1,1 +1,1 @@
-void wait(int time, int schematic);
+void wait(int time, int schemantic);
