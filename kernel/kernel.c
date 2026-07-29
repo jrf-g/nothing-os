@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "kprint.h"
+#include "kiosk.h"
 #include "gdt.h"
 #include "idt.h"
 #include "pic.h"
@@ -59,9 +60,6 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     }
     keyboard_init();
     __asm__ volatile("sti");
-    if (fancy) {
-        initdkl();
-    }
     mm_init(mb_info_addr);
     nfs_init();
     nfs_mkdir("/default");
@@ -75,7 +73,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     kprint("Memory system online.\n" STARTMEMSTR "-" MEMUNIT "(" MEMPLURAL ") allocated\n");
 
     chime();
-    shell();
+    runkiosk();
     
     for (;;) {}
 }
