@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "kprint.h"
+#include "sh.h"
 #include "gdt.h"
 #include "idt.h"
 #include "pic.h"
