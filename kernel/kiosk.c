@@ -3,6 +3,6 @@
 #include "kprint.h"
 void runkiosk() {
   kprint("Kiosk enter");
-  wait(1000);
+  wait(1000, 1);
   kprint("Kiosk exit");
 }
