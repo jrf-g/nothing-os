@@ -64,6 +64,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
         initdkl();
     }
     mm_init(mb_info_addr);
+    acpi_initialize();
     nfs_init();
     nfs_mkdir("/default");
 
