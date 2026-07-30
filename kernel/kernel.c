@@ -58,11 +58,11 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     #ifndef SAFEMODE
         pit_init(FREQ);
     #endif
-    keyboard_init();
     __asm__ volatile("sti");
-    if (fancy) {
-        initdkl();
-    }
+    keyboard_init();
+    #ifndef SAFEMODE
+    initdkl();
+    #endif
     mm_init(mb_info_addr);
     acpi_initialize();
     nfs_init();
@@ -73,6 +73,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     a = NULL;
     MemAddr b = safealloc(STARTMEMINT);
     memtest(b, STARTMEMINT);
+    kfree(b);
     kprint("Memory system online.\n" STARTMEMSTR "-" MEMUNIT "(" MEMPLURAL ") allocated\n");
 
     chime();
