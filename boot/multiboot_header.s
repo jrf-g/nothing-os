@@ -1,8 +1,8 @@
     .section .multiboot
     .align 4
-    .long 0x1BADB002          # magic
+    .long 0x2BADB002          # magic
     .long 0x0                 # flags
-    .long -(0x1BADB002)       # checksum
+    .long -(0x2BADB002)       # checksum
 
     .section .text
     .global _start
