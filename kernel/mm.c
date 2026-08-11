@@ -121,7 +121,6 @@ void* safemalloc(uint32_t safesize) {
 }
 
 static void oom() {
-    kprint("OUT OF MEMORY. MAX MEMORY =" MAXMEMSTR " THIS MAY ALSO BE CAUSED BY ANOTHER NON-OOM MEMORY FAULT");
     /*
     the ISR handles
     the chime but
