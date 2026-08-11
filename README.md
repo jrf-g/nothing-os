@@ -1,6 +1,6 @@
 # nothing-os
 
-A tiny educational i386 OS that deliberately does very little — just enough to boot, provide a minimal shell, a tiny filesystem, and a few toy kernel services. It's intended for learning OS internals, experimentation with multiboot/i386 toolchains, and for playing with the "DKL" module system documented in this repo.
+A tiny educational i386 OS that deliberately does very little — just enough to boot, provide a minimal shell, a tiny filesystem, and a few toy kernel services. It's intended for learning OS internals, experimentation with multiboot/i386 toolchains, and for playing with the DKL module system documented in this repo.
 
 ## Quick facts
 - Language: C + i386 Assembly
