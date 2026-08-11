@@ -1,5 +1,5 @@
 #include "autopit.h"
 #include "pit.h"
-void autoclk {
+void autoclk() {
   pit_init(FREQ);
 }
