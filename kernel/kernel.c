@@ -71,7 +71,7 @@ void kernel_main(uint32_t magic, uint32_t mb_info_addr) {
     MemAddr a = kmalloc(STARTMEMINT);
     kfree(a);
     a = NULL;
-    MemAddr b = safealloc(STARTMEMINT);
+    MemAddr b = safemalloc(STARTMEMINT);
     memtest(b, STARTMEMINT);
     kfree(b);
     kprint("Memory system online.\n" STARTMEMSTR "-" MEMUNIT "(" MEMPLURAL ") allocated\n");
