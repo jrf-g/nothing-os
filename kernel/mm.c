@@ -117,7 +117,7 @@ void* safemalloc(uint32_t safesize) {
     if (!buffer) {
         oom();
     }
-    return buffer
+    return buffer;
     
 }
 
