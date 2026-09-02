@@ -1,4 +1,4 @@
-#include powerctl.h
+#include "powerctl.h"
 #define USE_PMXB
 static inline void outb(uint16_t port, uint8_t value) {
     __asm__ volatile ("outb %0, %1" : : "a"(value), "Nd"(port));
@@ -20,7 +20,7 @@ void shutdown() {
     outw(0x0604, (0x7 << 10) | (1 << 13));
     #endif
 }
-extern hardoffasm
+extern void hardoffasm(void);
 void hardoff() {
   hardoffasm(); // invoke assembly shutdown routine
 }
