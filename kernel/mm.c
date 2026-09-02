@@ -3,6 +3,7 @@
 #include "kprint.h"
 #include "powerctl.h"
 #include "panicchime.h"
+#include "audio.h"
 #define MAXMEMINT 512
 #define MAXMEMSTR "512"
 
@@ -112,7 +113,7 @@ void* safemalloc(uint32_t safesize) {
     if (safesize > MAXMEMINT) {
         oom();
     }
-    buffer = kmalloc(safesize);
+    void* buffer = kmalloc(safesize);
     if (!buffer) {
         oom();
     }
