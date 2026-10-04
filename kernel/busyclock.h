@@ -1,1 +1,1 @@
-void wait(int time, int schemantic);
+void wait(int time, int semantic);
