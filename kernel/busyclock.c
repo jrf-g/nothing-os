@@ -1,4 +1,4 @@
-void wait(int time, int schemantic) {
+void wait(int time, int semantic) {
   for (i = 0; i < time; i++) {
     if (schematic != 0) {
       __asm__ volatile( "pause" ::: "memory" );
